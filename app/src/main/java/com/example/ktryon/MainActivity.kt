@@ -1,5 +1,6 @@
 package com.example.ktryon
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -32,7 +33,8 @@ class MainActivity : ComponentActivity() {
 
 
 
-@Preview(showBackground = true)
+@Preview(name = "Light Mode", showBackground = true)
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 private fun GreetingPreview() {
     KtryonTheme {
@@ -40,6 +42,7 @@ private fun GreetingPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background,
         ) {
+            CatalogueScreen()
         }
     }
 }
