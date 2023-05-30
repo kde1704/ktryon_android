@@ -32,8 +32,6 @@ val items: List<ShopItem> = List(16) {
             "https://i.kym-cdn.com/photos/images/newsfeed/002/343/546/d4f.jpg"
         )
     }
-
-
 }
 
 
@@ -42,7 +40,7 @@ val items: List<ShopItem> = List(16) {
 fun CatalogueScreen() {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
