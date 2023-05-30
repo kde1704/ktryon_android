@@ -1,4 +1,4 @@
-package com.example.ktryon.Catalogue
+package com.example.ktryon.CatalogueScreen
 
 import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
