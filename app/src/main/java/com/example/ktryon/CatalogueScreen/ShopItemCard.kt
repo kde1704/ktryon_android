@@ -23,16 +23,16 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.ktryon.R
-import com.example.ktryon.ShopItem.ShopItem
+import com.example.ktryon.PreviewScreen.Model.ShopItem
 import com.example.ktryon.ui.theme.KtryonTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShopItemCard(modifier: Modifier = Modifier, shopItem: ShopItem) {
+fun ShopItemCard(modifier: Modifier = Modifier, shopItem: ShopItem, onClick: () -> Unit) {
     ElevatedCard(
         modifier = modifier,
         elevation = CardDefaults.cardElevation(3.dp),
-        onClick = {},
+        onClick = onClick,
     ) {
         ShopItemImage(url = shopItem.imageUrl)
         ShopItemInfo(
@@ -103,7 +103,8 @@ private fun ShopItemCardPreview() {
                 "Femboy Skirt",
                 "$35.50",
                 "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252"
-            )
+            ),
+            onClick = {}
         )
     }
 }
