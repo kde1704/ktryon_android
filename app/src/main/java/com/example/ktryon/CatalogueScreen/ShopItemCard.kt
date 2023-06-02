@@ -23,7 +23,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.ktryon.R
-import com.example.ktryon.PreviewScreen.Model.ShopItem
+import com.example.ktryon.GlobalModel.ShopItem
 import com.example.ktryon.ui.theme.KtryonTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,10 +36,7 @@ fun ShopItemCard(modifier: Modifier = Modifier, shopItem: ShopItem, onClick: () 
     ) {
         ShopItemImage(url = shopItem.imageUrl)
         ShopItemInfo(
-            modifier = Modifier
-                .padding(12.dp),
-            name = shopItem.name,
-            price = shopItem.price
+            modifier = Modifier.padding(12.dp), name = shopItem.name, price = shopItem.price
         )
     }
 }
@@ -47,12 +44,8 @@ fun ShopItemCard(modifier: Modifier = Modifier, shopItem: ShopItem, onClick: () 
 @Composable
 private fun ShopItemImage(modifier: Modifier = Modifier, url: String) {
     val async_painter = rememberAsyncImagePainter(
-        model =
-        ImageRequest.Builder(LocalContext.current)
-            .data(url)
-            .size(coil.size.Size.ORIGINAL)
-            .crossfade(true)
-            .build()
+        model = ImageRequest.Builder(LocalContext.current).data(url).size(coil.size.Size.ORIGINAL)
+            .crossfade(true).build()
     )
 
     val painter = if (async_painter.state is AsyncImagePainter.State.Success) {
@@ -95,16 +88,11 @@ private fun ShopItemInfo(modifier: Modifier = Modifier, name: String, price: Str
 @Composable
 private fun ShopItemCardPreview() {
     KtryonTheme {
-        ShopItemCard(
-            modifier =
-            Modifier.width(200.dp),
-            shopItem =
-            ShopItem(
-                "Femboy Skirt",
-                "$35.50",
-                "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252"
-            ),
-            onClick = {}
-        )
+        ShopItemCard(modifier = Modifier.width(200.dp), shopItem = ShopItem(
+            "Femboy Skirt",
+            "$35.50",
+            "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252",
+            listOf()
+        ), onClick = {})
     }
 }

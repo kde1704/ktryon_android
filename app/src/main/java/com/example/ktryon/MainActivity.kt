@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.ktryon.Client.requestItems
 import com.example.ktryon.MainNavigation.MainNavHost
 import com.example.ktryon.MainNavigation.mainNavController
 import com.example.ktryon.ui.theme.KtryonTheme
@@ -20,6 +21,7 @@ import com.example.ktryon.ui.theme.KtryonTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             KtryonTheme {
                 Main()

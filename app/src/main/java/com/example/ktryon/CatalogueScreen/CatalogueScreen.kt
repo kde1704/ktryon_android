@@ -19,30 +19,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.ktryon.CatalogueScreen.Controller.navigateFromCardToPreview
-import com.example.ktryon.PreviewScreen.Model.ShopItem
 import com.example.ktryon.ui.theme.KtryonTheme
 
+import com.example.ktryon.Client.items
 
-val items: List<ShopItem> = List(16) {
-    if (it % 3 != 0) {
-        ShopItem(
-            "Femboy Skirt",
-            "$35.50",
-            "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252"
-        )
-    } else {
-        ShopItem(
-            "Distinguished Tie",
-            "$12.50",
-            "https://i.kym-cdn.com/photos/images/newsfeed/002/343/546/d4f.jpg"
-        )
-    }
-}
 
 @Composable
 fun CatalogueScreen(navController: NavHostController? = null) {
     Column {
-        CatalogueHeader(modifier = Modifier.fillMaxWidth().height(240.dp))
+        CatalogueHeader(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(240.dp)
+        )
         ShopItemGrid(navController = navController)
     }
 }
@@ -87,7 +76,8 @@ private fun ShopItemGrid(navController: NavHostController?) {
                         navController = navController,
                         name = it.name,
                         price = it.price,
-                        imageUrl = it.imageUrl
+                        imageUrl = it.imageUrl,
+                        tags = it.tags
                     )
                 }
             }

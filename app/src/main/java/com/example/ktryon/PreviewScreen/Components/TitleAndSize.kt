@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.ktryon.Components.SegmentedButton
-import com.example.ktryon.PreviewScreen.Model.ShopItem
+import com.example.ktryon.GlobalModel.ShopItem
 
 @Composable
 fun TitleAndSize(shopItem: ShopItem, modifier: Modifier = Modifier) {

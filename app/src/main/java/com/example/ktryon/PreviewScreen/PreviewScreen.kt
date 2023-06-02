@@ -15,11 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.ktryon.GlobalModel.ShopItem
 import com.example.ktryon.PreviewScreen.Components.Description
 import com.example.ktryon.PreviewScreen.Components.PreviewImage
 import com.example.ktryon.PreviewScreen.Components.Tags
 import com.example.ktryon.PreviewScreen.Components.TitleAndSize
-import com.example.ktryon.PreviewScreen.Model.ShopItem
+import com.example.ktryon.PreviewScreen.Model.parseTags
 import com.example.ktryon.ui.theme.KtryonTheme
 
 @Composable
@@ -30,7 +31,7 @@ fun PreviewScreen(
     imageUrl: String,
     tags: String
 ) {
-    val shopItem = ShopItem(name, price, imageUrl)
+    val shopItem = ShopItem(name, price, imageUrl, parseTags(tags))
 
     Column(
         modifier = Modifier.padding(16.dp),
@@ -49,23 +50,7 @@ fun PreviewScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        Tags(
-            listOf(
-                "Boykisser",
-                "Tag 1",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky",
-                "Unlucky"
-            ), modifier = Modifier.fillMaxWidth()
-        )
+        Tags(shopItem.tags, modifier = Modifier.fillMaxWidth())
     }
 }
 
