@@ -20,6 +20,7 @@ import com.example.ktryon.PreviewScreen.Components.Description
 import com.example.ktryon.PreviewScreen.Components.PreviewImage
 import com.example.ktryon.PreviewScreen.Components.Tags
 import com.example.ktryon.PreviewScreen.Components.TitleAndSize
+import com.example.ktryon.PreviewScreen.Components.TryOn
 import com.example.ktryon.PreviewScreen.Model.parseTags
 import com.example.ktryon.ui.theme.KtryonTheme
 
@@ -51,6 +52,8 @@ fun PreviewScreen(
         Spacer(modifier = Modifier.height(32.dp))
 
         Tags(shopItem.tags, modifier = Modifier.fillMaxWidth())
+
+        TryOn(text = "Try On", shopItem = shopItem)
     }
 }
 
@@ -68,7 +71,7 @@ private fun PreviewScreenPreview() {
                 "Femboy Skirt",
                 "$35.50",
                 "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252",
-                ""
+                "Tag"
             )
         }
     }
