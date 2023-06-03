@@ -58,8 +58,9 @@ private fun requestShopItemsJson(context: Context, after: (String) -> Unit) {
 private fun parseUnparsedShopItems(item: UnparsedShopItem): ShopItem {
     val parsed_price = String.format("$%.2f", item.price)
     val parsed_tags = item.tags.split(",")
+    val parsed_url = "$host/images/${item.url}.jpg"
 
-    return ShopItem(item.name, item.url, parsed_price, parsed_tags, item.id)
+    return ShopItem(item.name, parsed_url, parsed_price, parsed_tags, item.id)
 }
 
 private fun getShopItemsAsList(json_string: String): List<UnparsedShopItem> {

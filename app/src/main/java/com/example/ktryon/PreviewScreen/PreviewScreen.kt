@@ -34,7 +34,9 @@ import com.example.ktryon.ui.theme.KtryonTheme
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import com.example.ktryon.PreviewScreen.Components.AddressField
 import com.example.ktryon.PreviewScreen.Components.Checkout
 import com.example.ktryon.PreviewScreen.Controller.navigateFromPreviewToCheckout
 
@@ -48,6 +50,7 @@ fun PreviewScreen(
 ) {
     val shopItem = ShopItem(name, price, imageUrl, parseTags(tags))
     var size by remember { mutableStateOf(1) }
+    var address by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -76,10 +79,13 @@ fun PreviewScreen(
 
         Tags(shopItem.tags, modifier = Modifier.fillMaxWidth())
 
+        Spacer(modifier = Modifier.height(24.dp))
+
+        AddressField(address = address, onAddressChange = { address = it }, modifier = Modifier.fillMaxWidth())
 
         Spacer(modifier = Modifier.height(48.dp))
 
-        TryOn(modifier = Modifier.fillMaxWidth(), text = "Try On", shopItem = shopItem)
+        TryOn(modifier = Modifier.fillMaxWidth().height(32.dp), text = "Try On", shopItem = shopItem)
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -87,20 +93,22 @@ fun PreviewScreen(
             modifier = Modifier.alpha(0.6f).fillMaxWidth(),
             text = "OR",
             color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelSmall,
             textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        val context = LocalContext.current
+
         Checkout(
             "Checkout",
             onCheckout = {
                 if (navController != null) {
-                    navigateFromPreviewToCheckout(navController, shopItem.name, shopItem.price, shopItem.imageUrl)
+                    navigateFromPreviewToCheckout(navController, shopItem.name, size, address, context)
                 }
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().height(32.dp)
         )
     }
 }

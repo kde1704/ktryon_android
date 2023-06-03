@@ -16,7 +16,9 @@ fun ValidateLogin(username: String, password: String, navController: NavHostCont
         Request.Method.GET,
         "http://10.0.2.2:8933/check-login",
         { response ->
-            navController.navigate("Catalogue")
+            navController.navigate("Catalogue") {
+                popUpTo(0)
+            }
         },
         {
             onInvalidLogin()

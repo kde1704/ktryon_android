@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavHostController
 import com.example.ktryon.CatalogueScreen.CatalogueScreen
-import com.example.ktryon.CheckoutScreen.CheckoutScreen
+import com.example.ktryon.PostCheckoutScreen.PostCheckoutScreen
 import com.example.ktryon.LoginScreen.LoginScreen
 import com.example.ktryon.PreviewScreen.PreviewScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -42,19 +42,11 @@ fun MainNavHost(navController: NavHostController) {
         }
 
         composable(
-            "Checkout/{name}/{price}/{image_url}",
+            "Checkout",
             enterTransition = { enterTransition },
             exitTransition = { exitTransition },
         ) { backStackEntry ->
-            val name = backStackEntry.arguments?.getString("name")
-            val price = backStackEntry.arguments?.getString("price")
-            val image_url = backStackEntry.arguments?.getString("image_url")?.replace("|", "/")
-
-            if (name != null && price != null && image_url != null) {
-                CheckoutScreen(navController, name, price, image_url)
-            } else {
-                navController.navigate("Catalogue")
-            }
+            PostCheckoutScreen(navController)
         }
 
         composable(
@@ -62,7 +54,9 @@ fun MainNavHost(navController: NavHostController) {
             enterTransition = { enterTransition },
             exitTransition = { exitTransition },
         ) { backStackEntry ->
+
             CatalogueScreen(navController)
+
         }
 
         composable(
