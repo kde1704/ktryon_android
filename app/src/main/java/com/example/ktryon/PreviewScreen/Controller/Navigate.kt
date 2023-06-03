@@ -14,7 +14,9 @@ fun navigateFromPreviewToCheckout(navController: NavHostController, name: String
     }
 
     postCheckoutToServer(name, size_char, address, context) {
-        navController.navigate("Checkout")
+        navController.navigate("Checkout") {
+            popUpTo(0)
+        }
     }
 
 }

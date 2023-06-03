@@ -54,9 +54,7 @@ fun MainNavHost(navController: NavHostController) {
             enterTransition = { enterTransition },
             exitTransition = { exitTransition },
         ) { backStackEntry ->
-
             CatalogueScreen(navController)
-
         }
 
         composable(
