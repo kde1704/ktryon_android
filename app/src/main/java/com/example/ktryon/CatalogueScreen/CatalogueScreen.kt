@@ -15,14 +15,35 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.ktryon.CatalogueScreen.Controller.navigateFromCardToPreview
 import com.example.ktryon.ui.theme.KtryonTheme
+import com.example.ktryon.Client.requestShopItems
+import com.example.ktryon.GlobalModel.ShopItem
 
-import com.example.ktryon.Client.items
+// EXAMPLE
+// val example_items: List<ShopItem> = List(16) {
+//     if (it % 3 != 0) {
+//         ShopItem(
+//             "Femboy Skirt",
+//             "$35.50",
+//             "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252",
+//             listOf("Skirt", "Pink", "Ebullient", "Bubbly", "Oh")
+//         )
+//     } else {
+//         ShopItem(
+//             "Distinguished Tie",
+//             "$12.50",
+//             "https://i.kym-cdn.com/photos/images/newsfeed/002/343/546/d4f.jpg",
+//             listOf("Gentleman", "Man", "Tie", "Handsome", "Emoji")
+//         )
+//     }
+// }
 
+var items: List<ShopItem> = listOf()
 
 @Composable
 fun CatalogueScreen(navController: NavHostController? = null) {
@@ -33,6 +54,10 @@ fun CatalogueScreen(navController: NavHostController? = null) {
                 .height(240.dp)
         )
         ShopItemGrid(navController = navController)
+    }
+
+    requestShopItems(context = LocalContext.current) {
+        items = it
     }
 }
 

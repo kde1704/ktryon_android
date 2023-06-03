@@ -8,27 +8,6 @@ import com.android.volley.toolbox.Volley
 import com.example.ktryon.GlobalModel.ShopItem
 import com.google.gson.Gson
 
-
-// EXAMPLE
-// val example_items: List<ShopItem> = List(16) {
-//     if (it % 3 != 0) {
-//         ShopItem(
-//             "Femboy Skirt",
-//             "$35.50",
-//             "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252",
-//             listOf("Skirt", "Pink", "Ebullient", "Bubbly", "Oh")
-//         )
-//     } else {
-//         ShopItem(
-//             "Distinguished Tie",
-//             "$12.50",
-//             "https://i.kym-cdn.com/photos/images/newsfeed/002/343/546/d4f.jpg",
-//             listOf("Gentleman", "Man", "Tie", "Handsome", "Emoji")
-//         )
-//     }
-// }
-
-val items: List<ShopItem> = listOf()
 const val host = "127.0.0.1:15000"
 
 private data class UnparsedShopItem(
