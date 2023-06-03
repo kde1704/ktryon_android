@@ -6,24 +6,50 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.ktryon.Client.AuthedRequest
+import com.example.ktryon.Client.SendLoginToServer
+import com.example.ktryon.Client.SendNewAccountToServer
 import com.example.ktryon.Client.host
 
-fun ValidateLogin(username: String, password: String, navController: NavHostController, context: Context, onInvalidLogin: () -> Unit) {
-    val requestQueue = Volley.newRequestQueue(context)
+fun ValidateLogin(
+    username: String,
+    password: String,
+    navController: NavHostController,
+    context: Context,
+    onInvalidLogin: () -> Unit
+) {
     AuthedRequest.username = username
     AuthedRequest.password = password
-    val request = AuthedRequest(
-        Request.Method.GET,
-        "http://10.0.2.2:8933/check-login",
-        { response ->
+
+    SendLoginToServer(
+        context = context,
+        onValidLogin = {
             navController.navigate("Catalogue") {
                 popUpTo(0)
             }
         },
-        {
-            onInvalidLogin()
-        }
+        onInvalidLogin = { onInvalidLogin() }
     )
 
-    requestQueue.add(request)
+}
+
+fun CreateAccount(
+    username: String,
+    password: String,
+    navController: NavHostController,
+    context: Context,
+    onInvalidAccount: () -> Unit
+) {
+    AuthedRequest.username = username
+    AuthedRequest.password = password
+
+    SendNewAccountToServer(
+        context = context,
+        onValidAccount = {
+            navController.navigate("Catalogue") {
+                popUpTo(0)
+            }
+        },
+        onInvalidAccount = { onInvalidAccount() }
+    )
+
 }
