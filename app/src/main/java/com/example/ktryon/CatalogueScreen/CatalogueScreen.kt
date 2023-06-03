@@ -6,14 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,6 +22,8 @@ import com.example.ktryon.CatalogueScreen.Controller.navigateFromCardToPreview
 import com.example.ktryon.ui.theme.KtryonTheme
 import com.example.ktryon.Client.requestShopItems
 import com.example.ktryon.GlobalModel.ShopItem
+import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 
 // EXAMPLE
 // val example_items: List<ShopItem> = List(16) {
@@ -43,45 +44,34 @@ import com.example.ktryon.GlobalModel.ShopItem
 //     }
 // }
 
-var items: List<ShopItem> = listOf()
-
-@Composable
-fun CatalogueScreen(navController: NavHostController? = null) {
-    Column {
-        CatalogueHeader(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(240.dp)
+var items: List<ShopItem> = List(16) {
+    if (it % 3 != 0) {
+        ShopItem(
+            "Femboy Skirt",
+            "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252",
+            "$35.50",
+            listOf("Skirt", "Pink", "Ebullient", "Bubbly", "Oh")
         )
-        ShopItemGrid(navController = navController)
-    }
-
-    requestShopItems(context = LocalContext.current) {
-        items = it
+    } else {
+        ShopItem(
+            "Distinguished Tie",
+            "https://i.kym-cdn.com/photos/images/newsfeed/002/343/546/d4f.jpg",
+            "$12.50",
+            listOf("Gentleman", "Man", "Tie", "Handsome", "Emoji")
+        )
     }
 }
 
 @Composable
-fun CatalogueHeader(modifier: Modifier = Modifier) {
-//    Box(
-//        modifier = modifier,
-//        contentAlignment = Alignment.BottomStart
-//    ) {
-//        val darken = 0.6f
-//        Image(
-//            modifier = Modifier.fillMaxSize().blur(4.dp),
-//            painter = painterResource(id = R.drawable.header_image),
-//            contentDescription = null,
-//            contentScale = ContentScale.FillBounds,
-//
-//        )
-//
-//        Text(
-//            modifier = Modifier.padding(start = 16.dp, bottom = 16.dp),
-//            text = "Try On",
-//            style = MaterialTheme.typography.headlineLarge,
-//            fontWeight = FontWeight.Bold
-//        )
+fun CatalogueScreen(navController: NavHostController? = null) {
+    Column {
+        ShopItemGrid(navController = navController)
+    }
+
+//    requestShopItems(context = LocalContext.current) {
+//        if (it.size != 0) {
+//            items = it
+//        }
 //    }
 }
 

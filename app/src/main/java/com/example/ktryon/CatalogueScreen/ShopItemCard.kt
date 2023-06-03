@@ -90,8 +90,8 @@ private fun ShopItemCardPreview() {
     KtryonTheme {
         ShopItemCard(modifier = Modifier.width(200.dp), shopItem = ShopItem(
             "Femboy Skirt",
-            "$35.50",
             "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252",
+            "$35.50",
             listOf()
         ), onClick = {})
     }

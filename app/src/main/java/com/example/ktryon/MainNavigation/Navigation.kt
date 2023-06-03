@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavHostController
 import com.example.ktryon.CatalogueScreen.CatalogueScreen
+import com.example.ktryon.CheckoutScreen.CheckoutScreen
+import com.example.ktryon.LoginScreen.LoginScreen
 import com.example.ktryon.PreviewScreen.PreviewScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -30,7 +32,31 @@ fun mainNavController(previewNavController: NavHostController?): NavHostControll
 fun MainNavHost(navController: NavHostController) {
     val enterTransition = enterTransition()
     val exitTransition = exitTransition()
-    AnimatedNavHost(navController = navController, startDestination = "Catalogue") {
+    AnimatedNavHost(navController = navController, startDestination = "Login") {
+        composable(
+            "Login",
+            enterTransition = { enterTransition },
+            exitTransition = { exitTransition },
+        ) { backStackEntry ->
+            LoginScreen(navController)
+        }
+
+        composable(
+            "Checkout/{name}/{price}/{image_url}",
+            enterTransition = { enterTransition },
+            exitTransition = { exitTransition },
+        ) { backStackEntry ->
+            val name = backStackEntry.arguments?.getString("name")
+            val price = backStackEntry.arguments?.getString("price")
+            val image_url = backStackEntry.arguments?.getString("image_url")?.replace("|", "/")
+
+            if (name != null && price != null && image_url != null) {
+                CheckoutScreen(navController, name, price, image_url)
+            } else {
+                navController.navigate("Catalogue")
+            }
+        }
+
         composable(
             "Catalogue",
             enterTransition = { enterTransition },

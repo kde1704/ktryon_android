@@ -3,7 +3,7 @@ package com.example.ktryon.PreviewScreen.Components
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -12,23 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.ktryon.Client.PostTryOnBitmap
-import com.example.ktryon.GlobalModel.ShopItem
-import com.example.ktryon.PreviewScreen.Controller.chooseImageUriFromGallery
 
 @Composable
-fun TryOn(text: String, shopItem: ShopItem, modifier: Modifier = Modifier) {
-    val activityLauncher = chooseImageUriFromGallery {
-        PostTryOnBitmap(it, shopItem.name)
-    }
-
+fun Checkout(text: String, onCheckout: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         modifier = modifier,
         onClick = {
-            activityLauncher.launch("image/*")
+            onCheckout()
         }
     ) {
-        Icon(imageVector = Icons.Default.Star, contentDescription = null)
+        Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = null)
         Spacer(Modifier.width(4.dp))
         Text(text, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold)
     }

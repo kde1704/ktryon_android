@@ -1,5 +1,6 @@
 package com.example.ktryon.Components
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -23,7 +24,7 @@ import androidx.compose.ui.zIndex
 @Composable
 fun SegmentedButton(
     items: List<String>,
-    defaultSelectedItemIndex: Int = -1,
+    selectedIndex: Int = -1,
 
     useFixedWidth: Boolean = true,
     itemWidth: Dp = 120.dp,
@@ -37,8 +38,6 @@ fun SegmentedButton(
     onItemSelection: (selectedItemIndex: Int) -> Unit = {},
     itemComposable: @Composable (item: String, isSelected: Boolean) -> Unit,
 ) {
-    val selectedIndex = remember { mutableStateOf(defaultSelectedItemIndex) }
-
     Row(
         modifier = Modifier
     ) {
@@ -50,12 +49,12 @@ fun SegmentedButton(
                             Modifier
                                 .width(itemWidth)
                                 .offset(0.dp, 0.dp)
-                                .zIndex(if (selectedIndex.value == index) 1f else 0f)
+                                .zIndex(if (selectedIndex == index) 1f else 0f)
                         } else {
                             Modifier
                                 .wrapContentSize()
                                 .offset(0.dp, 0.dp)
-                                .zIndex(if (selectedIndex.value == index) 1f else 0f)
+                                .zIndex(if (selectedIndex == index) 1f else 0f)
                         }
                     }
 
@@ -64,16 +63,15 @@ fun SegmentedButton(
                             Modifier
                                 .width(itemWidth)
                                 .offset((-1 * index).dp, 0.dp)
-                                .zIndex(if (selectedIndex.value == index) 1f else 0f)
+                                .zIndex(if (selectedIndex == index) 1f else 0f)
                         else Modifier
                             .wrapContentSize()
                             .offset((-1 * index).dp, 0.dp)
-                            .zIndex(if (selectedIndex.value == index) 1f else 0f)
+                            .zIndex(if (selectedIndex == index) 1f else 0f)
                     }
                 }.height(itemHeight),
                 onClick = {
-                    selectedIndex.value = index
-                    onItemSelection(selectedIndex.value)
+                    onItemSelection(index)
                 },
                 shape = when (index) {
                     /**
@@ -105,7 +103,7 @@ fun SegmentedButton(
                     )
                 },
                 border = BorderStroke(1.dp, outlineColor),
-                colors = if (selectedIndex.value == index) {
+                colors = if (selectedIndex == index) {
                     /**
                      * selected colors
                      */
@@ -119,7 +117,7 @@ fun SegmentedButton(
                     ButtonDefaults.outlinedButtonColors(containerColor = unselectedColor)
                 },
             ) {
-                itemComposable(item, selectedIndex.value == index)
+                itemComposable(item, selectedIndex == index)
             }
         }
     }

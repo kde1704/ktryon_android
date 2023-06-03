@@ -8,8 +8,6 @@ import com.android.volley.toolbox.Volley
 import com.example.ktryon.GlobalModel.ShopItem
 import com.google.gson.Gson
 
-const val host = "127.0.0.1:15000"
-
 private data class UnparsedShopItem(
     val name: String,
     val url: String,
@@ -43,15 +41,16 @@ fun requestShopItems(
 
 private fun requestShopItemsJson(context: Context, after: (String) -> Unit) {
     val requestQueue = Volley.newRequestQueue(context)
-    val request = StringRequest(
+    val request = AuthedRequest(
         Request.Method.GET,
-        "$host/recommend?username=${GlobalUserData.username}",
+        "$host/recommend",
         { response ->
             after(response)
+        },
+        {
+            Log.e("REQUEST@ITEMS_CLIENT", "Error requesting from /recommend")
         }
-    ) {
-        Log.e("REQUEST@ITEMS_CLIENT", "Error requesting from /recommend")
-    }
+    )
 
     requestQueue.add(request)
 }
@@ -66,7 +65,8 @@ private fun parseUnparsedShopItems(item: UnparsedShopItem): ShopItem {
 private fun getShopItemsAsList(json_string: String): List<UnparsedShopItem> {
     // mutate items
     val gson = Gson()
-    val list: Array<UnparsedShopItem> = gson.fromJson(json_string, Array<UnparsedShopItem>::class.java)
+    val list: Array<UnparsedShopItem> =
+        gson.fromJson(json_string, Array<UnparsedShopItem>::class.java)
 
 
     return list.toList()

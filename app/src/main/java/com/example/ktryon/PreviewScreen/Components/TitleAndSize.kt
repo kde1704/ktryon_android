@@ -17,7 +17,7 @@ import com.example.ktryon.Components.SegmentedButton
 import com.example.ktryon.GlobalModel.ShopItem
 
 @Composable
-fun TitleAndSize(shopItem: ShopItem, modifier: Modifier = Modifier) {
+fun TitleAndSize(shopItem: ShopItem, modifier: Modifier = Modifier, size: Int, onSizeChange: (Int) -> Unit) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -35,7 +35,6 @@ fun TitleAndSize(shopItem: ShopItem, modifier: Modifier = Modifier) {
 
         val sizes = listOf("S", "M", "L")
 
-
         // curse you compose devs
         SegmentedButton(
             items = sizes,
@@ -45,6 +44,8 @@ fun TitleAndSize(shopItem: ShopItem, modifier: Modifier = Modifier) {
             outlineColor = MaterialTheme.colorScheme.outline,
             selectedColor = MaterialTheme.colorScheme.secondaryContainer,
             unselectedColor = MaterialTheme.colorScheme.surface,
+            onItemSelection = { onSizeChange(it) },
+            selectedIndex = size,
         ) { item, isSelected ->
             Text(
                 text = item,
