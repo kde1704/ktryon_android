@@ -21,7 +21,7 @@ import com.example.ktryon.ui.theme.KtryonTheme
 import com.example.ktryon.GlobalModel.ShopItem
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
-import com.example.ktryon.Client.requestShopItems
+import com.example.ktryon.Client.RequestShopItems
 
 
 var items: List<ShopItem> = List(16) {
@@ -39,7 +39,7 @@ fun CatalogueScreen(navController: NavHostController? = null) {
         ShopItemGrid(navController = navController)
     }
 
-    requestShopItems(context = LocalContext.current) {
+    RequestShopItems(context = LocalContext.current) {
         if (it.isNotEmpty()) {
             items = it
         }

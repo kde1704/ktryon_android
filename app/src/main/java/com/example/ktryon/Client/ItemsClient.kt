@@ -2,6 +2,7 @@ package com.example.ktryon.Client
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.Composable
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -16,7 +17,8 @@ private data class UnparsedShopItem(
     val tags: String
 )
 
-fun requestShopItems(
+@Composable
+fun RequestShopItems(
     o_json: String? = null,
     context: Context? = null,
     after: (List<ShopItem>) -> Unit
