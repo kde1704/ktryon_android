@@ -65,7 +65,7 @@ fun MainNavHost(navController: NavHostController) {
             val name = backStackEntry.arguments?.getString("name")
             val price = backStackEntry.arguments?.getString("price")
             val image_url = backStackEntry.arguments?.getString("image_url")?.replace("|", "/")
-            val tags = backStackEntry.arguments?.getString("tags")
+            val tags = backStackEntry.arguments?.getString("tags")?.replace("*", "/")
 
             if (name != null && price != null && image_url != null && tags != null) {
                 PreviewScreen(navController, name, price, image_url, tags)

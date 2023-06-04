@@ -14,29 +14,21 @@ import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun chooseImageUriFromGallery(after: (Bitmap) -> Unit): ManagedActivityResultLauncher<String, Uri?> {
-    val imageUri = rememberSaveable { mutableStateOf<Uri?>(null) }
-
-    val bitmap =  remember {
-        mutableStateOf<Bitmap?>(null)
-    }
-
+    val context = LocalContext.current
     val pickImageLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri ->
         if (uri != null) {
-            imageUri.value = uri
+            val source = ImageDecoder
+                .createSource(context.contentResolver, uri)
+            
+            val bitmap: Bitmap?
+            bitmap = ImageDecoder.decodeBitmap(source)
+
+            after(bitmap)
         }
     }
 
-    imageUri.value?.let {
-        val source = ImageDecoder
-            .createSource(LocalContext.current.contentResolver, it)
-        bitmap.value = ImageDecoder.decodeBitmap(source)
-
-        bitmap.value?.let { btm ->
-            after(btm)
-        }
-    }
 
     return pickImageLauncher
 }
