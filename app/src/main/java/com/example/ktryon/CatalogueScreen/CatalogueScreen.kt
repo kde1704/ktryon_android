@@ -20,24 +20,17 @@ import com.example.ktryon.CatalogueScreen.Controller.navigateFromCardToPreview
 import com.example.ktryon.ui.theme.KtryonTheme
 import com.example.ktryon.GlobalModel.ShopItem
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import com.example.ktryon.Client.requestShopItems
 
 
 var items: List<ShopItem> = List(16) {
-    if (it % 3 != 0) {
-        ShopItem(
-            "Femboy Skirt",
-            "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252",
-            "$35.50",
-            listOf("Skirt", "Pink", "Ebullient", "Bubbly", "Oh")
-        )
-    } else {
-        ShopItem(
-            "Distinguished Tie",
-            "https://i.kym-cdn.com/photos/images/newsfeed/002/343/546/d4f.jpg",
-            "$12.50",
-            listOf("Gentleman", "Man", "Tie", "Handsome", "Emoji")
-        )
-    }
+    ShopItem(
+        "",
+        "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?width=480",
+        "",
+        listOf("")
+    )
 }
 
 @Composable
@@ -46,11 +39,11 @@ fun CatalogueScreen(navController: NavHostController? = null) {
         ShopItemGrid(navController = navController)
     }
 
-//    requestShopItems(context = LocalContext.current) {
-//        if (it.size != 0) {
-//            items = it
-//        }
-//    }
+    requestShopItems(context = LocalContext.current) {
+        if (it.isNotEmpty()) {
+            items = it
+        }
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
