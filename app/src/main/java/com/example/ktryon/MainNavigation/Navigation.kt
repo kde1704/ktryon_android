@@ -16,6 +16,7 @@ import com.example.ktryon.CatalogueScreen.CatalogueScreen
 import com.example.ktryon.PostCheckoutScreen.PostCheckoutScreen
 import com.example.ktryon.LoginScreen.LoginScreen
 import com.example.ktryon.PreviewScreen.PreviewScreen
+import com.example.ktryon.TryOnPreview.TryOnPreviewScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -39,6 +40,15 @@ fun MainNavHost(navController: NavHostController) {
             exitTransition = { exitTransition },
         ) { backStackEntry ->
             LoginScreen(navController)
+        }
+
+        composable(
+            "TryOnPreview/{uuid}",
+            enterTransition = { enterTransition },
+            exitTransition = { exitTransition },
+        ) { backStackEntry ->
+            val uuid = backStackEntry.arguments?.getString("uuid")
+            TryOnPreviewScreen(uuid)
         }
 
         composable(

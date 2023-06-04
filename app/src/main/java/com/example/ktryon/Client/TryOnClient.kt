@@ -2,16 +2,11 @@ package com.example.ktryon.Client
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.widget.Toast
-import androidx.compose.runtime.Composable
-import com.android.volley.NetworkResponse
 import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.VolleyError
+import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.Volley
-import org.json.JSONException
-import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+import java.nio.charset.Charset
 
 
 private fun getFileDataFromDrawable(bitmap: Bitmap): ByteArray {
@@ -21,13 +16,15 @@ private fun getFileDataFromDrawable(bitmap: Bitmap): ByteArray {
 }
 
 // TODO: POST BITMAP AND NAME INFO (name IS CLOTHING ITEM NAME)
-fun PostTryOnBitmap(bitmap: Bitmap, name: String, context: Context) {
+fun PostTryOnBitmap(bitmap: Bitmap, name: String, context: Context, onSuccessfulTryOn: (String) -> Unit) {
     //our custom volley request
     val volleyMultipartRequest: VolleyMultipartRequest =
         object : VolleyMultipartRequest(
             Request.Method.POST, "$host/viton",
             { response ->
-                print("success!!!!!!!!!")
+                val uuid = String(response.data, Charset.defaultCharset())
+                onSuccessfulTryOn(uuid)
+                print("success!!!!!!!!! $uuid")
             },
             {}) {
 

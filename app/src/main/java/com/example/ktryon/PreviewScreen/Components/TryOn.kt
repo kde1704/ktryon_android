@@ -18,11 +18,11 @@ import com.example.ktryon.GlobalModel.ShopItem
 import com.example.ktryon.PreviewScreen.Controller.chooseImageUriFromGallery
 
 @Composable
-fun TryOn(text: String, shopItem: ShopItem, modifier: Modifier = Modifier) {
+fun TryOn(text: String, shopItem: ShopItem, modifier: Modifier = Modifier, onSuccessfulTryOn: (String) -> Unit) {
     val context = LocalContext.current
     val activityLauncher = chooseImageUriFromGallery {
         println("HELP ME")
-        PostTryOnBitmap(it, shopItem.name, context)
+        PostTryOnBitmap(it, shopItem.name, context, onSuccessfulTryOn)
     }
 
     Button(

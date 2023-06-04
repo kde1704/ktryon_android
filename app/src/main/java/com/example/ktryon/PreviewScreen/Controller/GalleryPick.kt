@@ -21,7 +21,7 @@ fun chooseImageUriFromGallery(after: (Bitmap) -> Unit): ManagedActivityResultLau
         if (uri != null) {
             val source = ImageDecoder
                 .createSource(context.contentResolver, uri)
-            
+
             val bitmap: Bitmap?
             bitmap = ImageDecoder.decodeBitmap(source)
 

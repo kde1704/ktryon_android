@@ -85,7 +85,9 @@ fun PreviewScreen(
 
         Spacer(modifier = Modifier.height(48.dp))
 
-        TryOn(modifier = Modifier.fillMaxWidth().height(32.dp), text = "Try On", shopItem = shopItem)
+        TryOn(modifier = Modifier.fillMaxWidth().height(32.dp), text = "Try On", shopItem = shopItem) {
+            navController?.navigate("TryOnPreview/$it")
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
 
