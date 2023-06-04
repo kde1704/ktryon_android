@@ -21,7 +21,6 @@ import com.example.ktryon.PreviewScreen.Controller.chooseImageUriFromGallery
 fun TryOn(text: String, shopItem: ShopItem, modifier: Modifier = Modifier, onSuccessfulTryOn: (String) -> Unit) {
     val context = LocalContext.current
     val activityLauncher = chooseImageUriFromGallery {
-        println("HELP ME")
         PostTryOnBitmap(it, shopItem.name, context, onSuccessfulTryOn)
     }
 

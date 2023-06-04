@@ -68,7 +68,7 @@ fun MainNavHost(navController: NavHostController) {
         }
 
         composable(
-            "Preview/{name}/{price}/{image_url}/{tags}",
+            "Preview/{name}/{price}/{image_url}/{tags}/{id}",
             enterTransition = { enterTransition },
             exitTransition = { exitTransition },
         ) { backStackEntry ->
@@ -77,8 +77,11 @@ fun MainNavHost(navController: NavHostController) {
             val image_url = backStackEntry.arguments?.getString("image_url")?.replace("|", "/")
             val tags = backStackEntry.arguments?.getString("tags")?.replace("*", "/")
 
-            if (name != null && price != null && image_url != null && tags != null) {
-                PreviewScreen(navController, name, price, image_url, tags)
+            val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+
+            if (name != null && price != null && image_url != null && tags != null && id != null) {
+                println("ID: " + id)
+                PreviewScreen(navController, name, price, image_url, tags, id)
             } else {
                 navController.navigate("Catalogue")
             }

@@ -24,7 +24,6 @@ fun PostTryOnBitmap(bitmap: Bitmap, name: String, context: Context, onSuccessful
             { response ->
                 val uuid = String(response.data, Charset.defaultCharset())
                 onSuccessfulTryOn(uuid)
-                print("success!!!!!!!!! $uuid")
             },
             {}) {
 

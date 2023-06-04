@@ -5,7 +5,7 @@ import android.util.Log
 import com.android.volley.Request
 import com.android.volley.toolbox.Volley
 
-fun postCheckoutToServer(name: String, size: String, address: String, context: Context, after: (String) -> Unit) {
+fun postCheckoutToServer(id: Int, size: String, address: String, context: Context, after: (String) -> Unit) {
     val requestQueue = Volley.newRequestQueue(context)
 
     val request = object : AuthedRequest(
@@ -21,7 +21,7 @@ fun postCheckoutToServer(name: String, size: String, address: String, context: C
     ) {
         override fun getParams(): MutableMap<String, String>? {
             val old: MutableMap<String, String> = mutableMapOf()
-            old.put("item", name)
+            old.put("item", id.toString())
             old.put("size", size)
             old.put("address", address)
             return old

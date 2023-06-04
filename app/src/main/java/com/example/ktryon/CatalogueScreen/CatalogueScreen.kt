@@ -63,7 +63,8 @@ private fun ShopItemGrid(navController: NavHostController?) {
                         name = it.name,
                         price = it.price,
                         imageUrl = it.imageUrl,
-                        tags = it.tags
+                        tags = it.tags,
+                        id = it.id
                     )
                 }
             }

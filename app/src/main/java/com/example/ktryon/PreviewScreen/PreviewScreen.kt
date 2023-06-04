@@ -46,9 +46,10 @@ fun PreviewScreen(
     name: String,
     imageUrl: String,
     price: String,
-    tags: String
+    tags: String,
+    id: Int
 ) {
-    val shopItem = ShopItem(name, price, imageUrl, parseTags(tags))
+    val shopItem = ShopItem(name, price, imageUrl, parseTags(tags), id)
     var size by remember { mutableStateOf(1) }
     var address by remember { mutableStateOf("") }
 
@@ -107,7 +108,7 @@ fun PreviewScreen(
             "Checkout",
             onCheckout = {
                 if (navController != null) {
-                    navigateFromPreviewToCheckout(navController, shopItem.name, size, address, context)
+                    navigateFromPreviewToCheckout(navController, shopItem.id, size, address, context)
                 }
             },
             modifier = Modifier.fillMaxWidth().height(32.dp)
@@ -129,7 +130,8 @@ private fun PreviewScreenPreview() {
                 "Femboy Skirt",
                 "https://kawaiibabe.com/cdn/shop/products/princess-pink-plaid-fur-lined-skirt-xs-bottoms-cosplay-fairy-kei-kawaii-lolita-skirts-ddlg-playground-363_800x.jpg?v=1612736252",
                 "$35.50",
-                "Tag"
+                "Tag",
+                0
             )
         }
     }

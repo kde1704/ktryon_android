@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import com.example.ktryon.Client.postCheckoutToServer
 
 
-fun navigateFromPreviewToCheckout(navController: NavHostController, name: String, size: Int, address: String, context: Context) {
+fun navigateFromPreviewToCheckout(navController: NavHostController, id: Int, size: Int, address: String, context: Context) {
     val size_char = when (size) {
         0 -> "S"
         1 -> "M"
@@ -13,7 +13,7 @@ fun navigateFromPreviewToCheckout(navController: NavHostController, name: String
         else -> "M"
     }
 
-    postCheckoutToServer(name, size_char, address, context) {
+    postCheckoutToServer(id, size_char, address, context) {
         navController.navigate("Checkout") {
             popUpTo(0)
         }
